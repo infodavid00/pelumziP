@@ -1,4 +1,4 @@
-import server from "chronos";
+import server from "../chronos/src/chronos.js";
 import { pod } from "./interface.js";
 
 const options = {
