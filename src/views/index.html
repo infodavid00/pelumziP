@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page 02</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+   <form id="form">
+       <div class="container" id="form1">
+           <h2>Personal Information</h2>
+           <input type="text" id="fullname" class="userInput" placeholder="Full Name" required />
+           <input type="email" id="email" class="userInput" placeholder="Email address" required />
+           <input type="number" id="mobile" class="userInput" placeholder="Mobile" required />
+           <button type="button" class="proceedButton" onclick="showNextForm(2)">Continue</button>
+       </div>
+       
+       <div class="container" id="form2">
+           <h2>Trip Details</h2>
+           <div style="text-align:left;width:100%;margin-left:0.5em;">Departure date and time</div>
+           <input type="datetime-local" id="ddat" class="userInput" required />
+           <div style="text-align:left;width:100%;margin-left:0.5em;">Return date and time</div>
+           <input type="datetime-local" id="rdat" class="userInput" required />       
+           <input type="text" id="departure-loc" class="userInput" placeholder="Departure Location (Address or Coordinates)" required />
+           <input type="text" id="destination-loc" class="userInput" placeholder="Destination Location (Address / Coordinates)" required />
+           <input type="number" id="nofp" class="userInput" placeholder="Number of passengers" required />
+           <button type="button" class="proceedButton" onclick="showNextForm(3)">Continue</button>
+       </div> 
+       
+       <div class="container" id="form3">
+           <h2>Special Requirements</h2>
+           <input type="text" id="specialRequests" class="userInput" placeholder="Any special requests? eg mobility issues etc" required />
+           <input type="number" id="noofb" class="userInput" placeholder="Number of bags" required />
+           <input type="number" id="logweight" class="userInput" placeholder="Luggage weight" required />
+           <button type="button" class="proceedButton" onclick="showNextForm(4)">Continue</button>
+       </div>
+       
+       <div class="container" id="form4">
+           <h2>Additional Services</h2>
+           <div style="text-align:left;width:100%;margin-left:0.5em;">Ground Transportation</div>    
+           <select class="userInput" name="groundTp" required>
+               <option value="">Select an option</option>
+               <option value="Yes">Yes</option>   
+               <option value="No">No</option> 
+           </select>
+           <div style="text-align:left;width:100%;margin-left:0.5em;">Accommodation Booking</div>    
+           <select class="userInput" name="Ab" required>
+               <option value="">Select an option</option>
+               <option value="Yes">Yes</option>   
+               <option value="No">No</option> 
+           </select>         
+           <div style="text-align:left;width:100%;margin-left:0.5em;">SightSeeing Tours</div>    
+           <select class="userInput" name="SsTours" required>
+               <option value="">Select an option</option>
+               <option value="Yes">Yes</option>   
+               <option value="No">No</option> 
+           </select>         
+           <input type="text" id="ASother" class="userInput" placeholder="Other (please specify)" />
+           <button type="button" class="proceedButton" onclick="showNextForm(5)">Continue</button>
+       </div>
+       
+       <div class="container" id="form5">
+           <h2>Emergency Contact Information</h2>
+           <input type="text" id="e-name" class="userInput" placeholder="Name" required />
+           <input type="text" id="e-relationship" class="userInput" placeholder="Relationship" required />    
+           <input type="number" id="e-mobile" class="userInput" placeholder="Mobile Number" required />                
+           <input type="email" id="e-email" class="userInput" placeholder="Email address" required />
+           <button type="button" class="proceedButton" onclick="showNextForm(6)">Continue</button>
+       </div>
+       
+       <div class="container" id="form6">
+           <h2>Agreement and Confirmation</h2>
+           <label class="checkbox-container">
+               Terms and Conditions
+               <input type="checkbox" id="agreement-checkbox-1" required>
+           </label>
+           <label class="checkbox-container">
+               Privacy Policy
+               <input type="checkbox" id="agreement-checkbox-2" required>
+           </label> 
+           <div style="text-align:left;width:100%;margin-left:0.5em;">Signature</div>
+           <canvas id="signature-pad" class="userInput" style="border: 1px solid black; width: 100%; height: 200px;" required></canvas>
+           <button type="button" id="clear-signature" class="proceedButton">Clear</button>
+           <button type="submit" class="proceedButton">Submit</button>
+       </div>
+   </form>
+   
+   <script>
+       const signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+       document.getElementById('clear-signature').addEventListener('click', function () {
+           signaturePad.clear();
+       });
+
+       document.getElementById("form").addEventListener("submit", function(e) {
+           e.preventDefault();
+           if (signaturePad.isEmpty()) {
+               alert("Please provide a signature.");
+               return;
+           }
+           const formData = {
+               fullname: document.getElementById("fullname").value,
+               email: document.getElementById("email").value,
+               mobile: document.getElementById("mobile").value,
+               ddat: document.getElementById("ddat").value,
+               rdat: document.getElementById("rdat").value,
+               departureLoc: document.getElementById("departure-loc").value,
+               destinationLoc: document.getElementById("destination-loc").value,
+               nofp: document.getElementById("nofp").value,
+               specialRequests: document.getElementById("specialRequests").value,
+               noofb: document.getElementById("noofb").value,
+               logweight: document.getElementById("logweight").value,
+               groundTp: document.querySelector('select[name="groundTp"]').value,
+               Ab: document.querySelector('select[name="Ab"]').value,
+               SsTours: document.querySelector('select[name="SsTours"]').value,
+               ASother: document.getElementById("ASother").value,
+               eName: document.getElementById("e-name").value,
+               eRelationship: document.getElementById("e-relationship").value,
+               eMobile: document.getElementById("e-mobile").value,
+               eEmail: document.getElementById("e-email").value,
+               agreementTerms: document.getElementById("agreement-checkbox-1").checked,
+               agreementPrivacy: document.getElementById("agreement-checkbox-2").checked,
+               signature: signaturePad.toDataURL()
+           };
+           // here
+           fetch('/post', {
+             method: "POST",
+             headers: {
+                Srt: 'main',
+                'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(formData)
+           }).then((data) => data.status = 200 ? window.location.reload() :
+            console.log('error')).
+            catch(e => console.error(error));    
+       });
+
+       function showNextForm(formNumber) {
+           const currentForm = document.querySelector(".container.active");
+           if (currentForm) {
+               const requiredFields = currentForm.querySelectorAll("[required]");
+               for (let field of requiredFields) {
+                   if (!field.value) {
+                       alert("Please fill all required fields.");
+                       return;
+                   }
+               }
+           }
+           
+           const forms = document.querySelectorAll(".container");
+           forms.forEach(function(form) {
+               form.classList.remove("active");
+           });
+           document.getElementById("form" + formNumber).classList.add("active");
+       }
+
+       document.addEventListener("DOMContentLoaded", function() {
+           showNextForm(1);
+       });
+   </script>
+</body>
+</html>

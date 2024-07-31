@@ -1,0 +1,16 @@
+
+
+
+# Local env
+
+# Global env
+application.name: pelumiProject
+application.version: 0.0.0
+application.releaseTag: prod
+
+listener.port: 3000
+
+view.cacheMaxMem: 0.1
+view.updateCacheAfter: 180
+view.rewriteToEntry: true
+view.usesCacheBusting: false
