@@ -1,14 +1,12 @@
-
-
-
 # Local env
 
 # Global env
 application.name: pelumiProject
-application.version: 0.0.0
+application.version: 1.0.0
 application.releaseTag: prod
 
 listener.port: 3000
+listener.address: 127.0.0.1
 
 view.cacheMaxMem: 0.1
 view.updateCacheAfter: 180
