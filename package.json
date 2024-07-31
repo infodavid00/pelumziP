@@ -8,9 +8,12 @@
     "start": "node src/index.js"
   },
   "dependecies": {
-     "chronos": "1.0.0"
+    "chronos": "1.0.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
 }
